@@ -1,0 +1,298 @@
+body {
+
+    &:hover .mynav {
+
+
+        background-color: $dark_back;
+
+        & * {
+            color: $dark_black;
+        }
+
+    }
+
+    // #mynav,
+    // #settings,
+    // #chat,
+    // #bonus,
+    // #info {
+    //     background-color: $light_back;
+    // }
+
+    .mynav {
+
+        &:hover * {
+            filter: blur(0);
+            //  background-color: red;
+        }
+
+        &:not(.transparentable) {
+            background-color: $dark_back;
+        }
+
+        &:not(:hover) {
+            transition: ease-in $nav_transition;
+        }
+
+        color: darken($dark_back_def, 10%);
+
+        // margin-top: 2rem;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+
+        // padding-top: 0.3rem;
+        &:hover {
+            // color: red;
+        }
+
+        // border-top: 0.2rem solid black;
+        // border-left: 0.2rem solid black;
+        // border-right: 0.2rem solid black;
+
+        //  margin: 0.2rem;
+        margin-bottom: 0;
+        //  margin-left: 0.1rem;
+        //  margin-right: 0.1rem;
+        // margin-right: 1rem;
+        grid-area: nav;
+        flex-direction: row;
+        // -webkit-app-region: drag;
+
+        // -webkit-user-select: none;
+
+        >ul.nav_list {
+
+            -webkit-app-region: drag;
+            padding: 0.1rem;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+
+            .nav__item {
+             
+                transition: ease-in $out_transition;
+                -webkit-app-region: none;
+                // border: 1px gray solid;
+                // background-color: red;
+                display: flex;
+                justify-content: center;
+                cursor: pointer;
+
+                width: 2.2rem;
+                // padding-top: 0.1rem;
+                // padding-bottom: 0.1rem;
+
+                >div {
+                    display: none;
+
+                }
+
+                padding: 0.1rem;
+
+
+                i {
+                    justify-content: center;
+                    -webkit-app-region: none;
+                    font-size: 23px;
+                }
+
+                &:hover {
+                //     transition: color 1ms;
+                //    background-color: $dark_back_def; 
+                //    border-radius: .5rem;
+                i {
+
+                    color: cornflowerblue;
+                    cursor: pointer;
+                }}
+
+                &:not(:hover) {
+                    // transition: color 1ms;
+                    
+                    i {
+
+                    transition: ease $unhover_transition;
+                }}
+
+
+                // color: cornflowerblue;
+
+                //  &:hover i { }
+            }
+
+            >li#menu_cliplist {
+                >i.fal.fa-phone {}
+
+                >div {}
+            }
+
+            >li#menu_settings {
+                >i.fal.fa-cog {}
+
+                >div {}
+            }
+
+            >li#menu_chat {
+
+                // display: none;
+                >i.fal.fa-comment-alt-dots {}
+
+                >div {}
+            }
+
+            >li#menu_bonus {
+                display: none;
+
+                &:hover i {
+                    color: red;
+                }
+
+                >i.fal.fa-skull.fa-spin {}
+
+                >div {}
+            }
+
+            >li#menu_info {
+                >i.fal.fa-info {}
+
+                >div {}
+            }
+
+            >li#menu_minimize {
+                margin-left: auto;
+
+
+            }
+
+            >li#menu_close {
+                margin-right: 0;
+                padding-right: 0;
+
+                &:hover i {
+                    color: red;
+                }
+            }
+        }
+
+        .nav__item {}
+
+
+
+
+
+    }
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+        // overflow-y: hidden;
+
+        //   color: $dark_black;
+
+
+
+        &:hover .mynav {
+
+
+            background-color: $dark_back;
+
+            & * {
+                color: $dark_black;
+            }
+
+        }
+
+        .mynav {
+            color: darken($dark_back_def, 10%);
+
+            .nav__item {
+                transition: ease-in $out_transition;
+
+            }
+        }
+    }
+
+
+
+    .mynav:not(.transparentable) {
+        background-color: $dark_back;
+    }
+
+    #mynav,
+    #settings,
+    #chat,
+    #bonus,
+    #info {
+        background-color: $dark_back;
+    }
+
+}
+
+@media (prefers-color-scheme: light) {
+
+   
+
+
+    body {
+
+        // color: $light_black;
+        &:hover .mynav {
+            background-color: $light_back;
+
+            & * {
+                color: $light_black;
+            }
+
+        }
+
+        .mynav {
+            color: darken($light_back_def, 80%);
+
+            .nav__item {
+                transition: ease-in $out_transition;
+
+            }
+
+        }
+    }
+
+
+
+
+    .cliplist:hover {
+        background-color: $light_back;
+    }
+
+    .cliplist:hover {
+        background-color: $light_back;
+    }
+
+    .clip__item:hover {
+        background-color: $light_hover;
+    }
+
+    .menu-list-item-active {
+        background-color: $light_active;
+    }
+
+    .clip__item.menu-list-item-active:hover {
+        background-color: $light_active;
+    }
+
+    .mynav:not(.transparentable) {
+        background-color: $light_back;
+    }
+
+
+    #mynav,
+    #settings,
+    #chat,
+    #bonus,
+    #info {
+        background-color: $light_back;
+    }
+}

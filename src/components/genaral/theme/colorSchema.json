@@ -1,0 +1,19 @@
+{
+  "data" : {
+    "light": {
+      "id" : "1",
+      "name" : "Sea Wave",
+      "colors": {
+        "font" : "#212121",
+        "inactive" : "#C1D6D9",
+        "active" : "#027368",
+        "alert": "#04BFBF",
+        "filled": "#027368",
+        "attention": "#038C73"
+      }
+    }
+  },
+  "default": {
+
+  }
+}

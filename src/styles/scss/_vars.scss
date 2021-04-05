@@ -1,0 +1,35 @@
+$out_transition : 3000ms;
+$nav_transition : 3000ms;
+$unhover_transition : 300ms;
+$appear_transition : 50ms;
+
+$light_back : #ffffff;
+$light_back_def : rgba(255, 255, 255, 0.275);
+$light_black : #212121;
+$light_hover: rgba(255, 186, 96, 0.253);
+$light_active: rgba(144, 238, 144, 0.548);
+$dark_back_def : rgba(255, 255, 255, 0.275);
+$dark_black : #ffffff;
+$dark_hover: rgba(188, 133, 255, 0.253);
+$dark_active: rgba(100, 149, 237, 0.548);
+$dark_back : #212121;
+$dark_back_tr : #212121c5;
+$topcolor: #b1f4cf ;
+
+// $back_primary: #ace0f9;
+// $back_secondary:  #fff1eb;
+// $back_primary: #900084a9;
+// $back_primary: #f6bb198c;
+// $back_primary: #535de7;
+
+$back_primary : #212121; 
+// for chat
+$back_secondary:  lighten($back_primary, 10%);
+$font_heavy: 600;
+$font_color_primary: #ffffff;
+
+$font_color_calm: darken($font_color_primary,20%);
+$font_color_secondary: $back_secondary;
+$side_gradient: linear-gradient( #fff1eb 0%, #ace0f9 100%);
+
+$mynav_height: 2.5rem;

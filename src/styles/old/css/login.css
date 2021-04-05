@@ -1,0 +1,44 @@
+body {
+  background-color: floralwhite;
+  background: url("../../content/login.jpg");
+  width: 100%;
+  height: 100vh;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  animation: animation 100s linear infinite;
+}
+body #container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25vh;
+  height: 200px;
+}
+body #container h1 {
+  color: white;
+  font-size: 10vh;
+  margin-bottom: 10vh;
+}
+body #container button {
+  color: white;
+  padding: 1rem;
+  outline: none;
+  border: 2px solid floralwhite;
+  border-radius: 2vh;
+  font-size: 7vh;
+  background-color: rgba(245, 245, 245, 0.5);
+}
+body #container button:hover {
+  color: gray;
+  transition: all 1sec;
+  background-color: floralwhite;
+  border: 2px solid #67a9ff;
+}
+@keyframes animation {
+  100% {
+    background-position: 0px -3000px;
+  }
+}
+
+/*# sourceMappingURL=login.css.map */
