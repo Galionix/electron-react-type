@@ -26,6 +26,30 @@ const Container = styled.div`
 const AppContainer = () => {
 
   const {theme, themeLoaded, getFonts} = useTheme();
+
+  interface MyTheme
+  {
+
+theme?:{
+
+  colors: {
+    body?: string,
+    text?: string,
+    button: {
+      text?: string,
+      background?: string
+    },
+    link: {
+      text?: string,
+      opacity?: number
+    }
+  },
+  font?: string
+};
+
+
+  }
+
   const [selectedTheme, setSelectedTheme] = useState(theme);
 
   useEffect(() => {
@@ -45,19 +69,15 @@ const AppContainer = () => {
 
   return (
     <>
+
+
     {
-      themeLoaded && <ThemeProvider theme={ selectedTheme }>
+      themeLoaded && <ThemeProvider theme={  selectedTheme }>
         <GlobalStyles/>
-        <Container style={{fontFamily: selectedTheme.font}}>
-          <h1>Theme Builder</h1>
-          <p>
-            This is a theming system with a Theme Switcher and Theme Builder.
-            Do you want to see the source code? <a href='https://github.com/atapas/theme-builder' target='_blank'>Click here.</a>
-          </p>
 
-          <ThemeSelector  setter={ setSelectedTheme }/>
+        <Navbar style={selectedTheme.colors}/>
 
-        </Container>
+
       </ThemeProvider>
     }
     </>
@@ -67,6 +87,79 @@ const AppContainer = () => {
   );
 };
 
+const Settings = () => {
+
+  const {theme, themeLoaded, getFonts} = useTheme();
+
+  interface MyTheme
+  {
+
+theme?:{
+
+  colors: {
+    body?: string,
+    text?: string,
+    button: {
+      text?: string,
+      background?: string
+    },
+    link: {
+      text?: string,
+      opacity?: number
+    }
+  },
+  font?: string
+};
+
+
+  }
+
+  const [selectedTheme, setSelectedTheme] = useState(theme);
+
+  useEffect(() => {
+    setSelectedTheme(theme);
+   }, [themeLoaded]);
+
+
+     // 4: Load all the fonts
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: getFonts()
+      }
+    });
+  });
+
+
+  return (
+    <>
+
+
+    {
+      themeLoaded && <ThemeProvider theme={  selectedTheme }>
+        <GlobalStyles/>
+
+
+        <Container style={{fontFamily: selectedTheme.font}}>
+          <h1>Theme Builder</h1>
+          <p>
+            This is a theming system with a Theme Switcher and Theme Builder.
+            Do you want to see the source code?
+            <a href='https://github.com/atapas/theme-builder' target='_blank'>Click here.</a>
+          </p>
+
+          <ThemeSelector  setter={ setSelectedTheme }/>
+
+        </Container>
+      </ThemeProvider>
+    }
+    </>
+
+  );
+};
+
+
+
 export default function App () {
 
   setToLS('all-themes', themes.default);
@@ -74,6 +167,9 @@ export default function App () {
     <Router>
       <Switch>
         <Route path='/' component={AppContainer} />
+      </Switch>
+      <Switch>
+        <Route path='/settings/' component={Settings} />
       </Switch>
     </Router>
   );

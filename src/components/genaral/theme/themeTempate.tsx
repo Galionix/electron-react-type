@@ -21,12 +21,16 @@ const Wrapper = styled.li`
     border-radius: 4px;
     border: 1px solid #000;
     list-style: none;
+    max-width: 6rem;
+    margin: 1rem;
 `;
 
 const Container = styled.ul`
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    // gap: 1rem;
+    // grid-template-columns: repeat(2, 1fr);
+    flex-flow: row wrap;
+    justify-content: space-around;
     margin-top: 3rem;
     padding: 10px;
 `;
