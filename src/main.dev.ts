@@ -103,7 +103,7 @@ const createWindow = async () => {
       nodeIntegration: true,
     },
   });
-  mainWindow.setAlwaysOnTop(true, 'normal');
+  // mainWindow.setAlwaysOnTop(true, 'normal');
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 

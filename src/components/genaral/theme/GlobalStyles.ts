@@ -28,7 +28,7 @@ theme?:{
 
 
 
-export const GlobalStyles:any = createGlobalStyle`
+export const GlobalStyles:any = createGlobalStyle<MyTheme>`
   body {
 
     background: ${({ theme }) => theme.colors.body};

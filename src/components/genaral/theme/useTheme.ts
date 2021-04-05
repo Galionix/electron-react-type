@@ -4,6 +4,8 @@ import _ from 'lodash';
 
 export const useTheme = () => {
   const themes = getFromLS('all-themes');
+
+
   const [theme, setTheme] = useState(themes.data.light);
   const [themeLoaded, setThemeLoaded] = useState(false);
 
@@ -19,7 +21,7 @@ export const useTheme = () => {
 
   useEffect(() =>{
     const localTheme = getFromLS('theme');
-    localTheme ? setTheme(localTheme) : setTheme(themes.data.light);
+    localTheme ? setTheme(localTheme) : setTheme(themes.data.seaWave);
     setThemeLoaded(true);
   }, []);
 

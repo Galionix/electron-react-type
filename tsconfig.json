@@ -10,7 +10,7 @@
     "strict": true,
     "pretty": true,
     "sourceMap": true,
-
+"noEmitOnError": true,
 
 
 

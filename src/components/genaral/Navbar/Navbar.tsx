@@ -77,7 +77,7 @@ flex-direction: row;
 height: min-content;
 
 `;
-  const NavLeft = styled.ul`
+const NavLeft = styled.ul`
 width: 50%;
 height: min-content;
 background-color: white;
@@ -93,7 +93,7 @@ padding-top: 1px;
 }
 -webkit-app-region: drag;
   `;
-  const NavRight = styled.ul`
+const NavRight = styled.ul`
   padding-top: 1px;
 width: 50%;
 height: min-content;

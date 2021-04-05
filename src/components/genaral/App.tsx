@@ -13,7 +13,10 @@ import WebFont from 'webfontloader';
 import './App.scss';
 import { setToLS } from '../../utils/Lstorage';
 import * as themes from '../genaral/theme/Schema.json';
+import ThemeSelector from '../genaral/theme/themeTempate';
+
 // import * as themes from '../colorSchema.json';
+
 
 
 const Container = styled.div`
@@ -51,6 +54,9 @@ const AppContainer = () => {
             This is a theming system with a Theme Switcher and Theme Builder.
             Do you want to see the source code? <a href='https://github.com/atapas/theme-builder' target='_blank'>Click here.</a>
           </p>
+
+          <ThemeSelector  setter={ setSelectedTheme }/>
+
         </Container>
       </ThemeProvider>
     }
