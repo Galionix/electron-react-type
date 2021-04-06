@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -18,10 +18,129 @@ import ThemeSelector from '../genaral/theme/themeTempate';
 // import * as themes from '../colorSchema.json';
 
 
-
 const Container = styled.div`
   margin: 5px auto 5px auto;
 `;
+
+// const AppContainer = () => {
+
+//   const {theme, themeLoaded, getFonts} = useTheme();
+
+//   interface MyTheme
+//   {
+
+// theme?:{
+
+//   colors: {
+//     body?: string,
+//     text?: string,
+//     button: {
+//       text?: string,
+//       background?: string
+//     },
+//     link: {
+//       text?: string,
+//       opacity?: number
+//     }
+//   },
+//   font?: string
+// };
+
+
+//   }
+
+//   const [selectedTheme, setSelectedTheme] = useState(theme);
+
+//   useEffect(() => {
+//     setSelectedTheme(theme);
+//    }, [themeLoaded]);
+
+
+//      // 4: Load all the fonts
+//   useEffect(() => {
+//     WebFont.load({
+//       google: {
+//         families: getFonts()
+//       }
+//     });
+//   });
+
+
+//   return (
+//     <>
+
+
+//     {
+//       themeLoaded && <ThemeProvider theme={  selectedTheme }>
+//         <GlobalStyles/>
+
+//         <Navbar style={selectedTheme.colors}/>
+
+
+//       </ThemeProvider>
+//     }
+//     </>
+//     // <div>
+//     //   <Navbar />
+//     // </div>
+//   );
+// };
+
+
+
+
+const cliplist = () => {
+  return (
+    <div>
+      cliplist
+    </div>
+  );
+};
+
+const webchat = () => {
+  return (
+    <div>
+      webchat
+    </div>
+  );
+};
+
+const settings = () => {
+
+  const {theme, themeLoaded, getFonts} = useTheme();
+
+
+  const [selectedTheme, setSelectedTheme] = useState(theme);
+
+  useEffect(() => {
+    setSelectedTheme(theme);
+   }, [themeLoaded]);
+
+  return (
+    <div>
+      settings
+      <Container style={{fontFamily: selectedTheme.font}}>
+          <h1>Theme Builder</h1>
+          <p>
+            This is a theming system with a Theme Switcher and Theme Builder.
+            Do you want to see the source code?
+            <a href='https://github.com/atapas/theme-builder' target='_blank'>Click here.</a>
+          </p>
+
+          <ThemeSelector  setter={ setSelectedTheme }/>
+
+        </Container>
+    </div>
+  );
+};
+
+
+
+
+
+
+
+
 
 const AppContainer = () => {
 
@@ -51,6 +170,7 @@ theme?:{
   }
 
   const [selectedTheme, setSelectedTheme] = useState(theme);
+  const [location, setLocation] = useState('/');
 
   useEffect(() => {
     setSelectedTheme(theme);
@@ -74,83 +194,21 @@ theme?:{
     {
       themeLoaded && <ThemeProvider theme={  selectedTheme }>
         <GlobalStyles/>
+       <Router>
+         <Navbar style={selectedTheme.colors} locationSet={setLocation}/>
 
-        <Navbar style={selectedTheme.colors}/>
+         <Switch>
+        <Route exact={true} path='/' component={cliplist} />
 
+        <Route path='/settings/' component={settings} />
 
-      </ThemeProvider>
-    }
-    </>
-    // <div>
-    //   <Navbar />
-    // </div>
-  );
-};
-
-const Settings = () => {
-
-  const {theme, themeLoaded, getFonts} = useTheme();
-
-  interface MyTheme
-  {
-
-theme?:{
-
-  colors: {
-    body?: string,
-    text?: string,
-    button: {
-      text?: string,
-      background?: string
-    },
-    link: {
-      text?: string,
-      opacity?: number
-    }
-  },
-  font?: string
-};
+        <Route  path='/webchat/' component={webchat} />
+      </Switch>
 
 
-  }
-
-  const [selectedTheme, setSelectedTheme] = useState(theme);
-
-  useEffect(() => {
-    setSelectedTheme(theme);
-   }, [themeLoaded]);
+     </Router>
 
 
-     // 4: Load all the fonts
-  useEffect(() => {
-    WebFont.load({
-      google: {
-        families: getFonts()
-      }
-    });
-  });
-
-
-  return (
-    <>
-
-
-    {
-      themeLoaded && <ThemeProvider theme={  selectedTheme }>
-        <GlobalStyles/>
-
-
-        <Container style={{fontFamily: selectedTheme.font}}>
-          <h1>Theme Builder</h1>
-          <p>
-            This is a theming system with a Theme Switcher and Theme Builder.
-            Do you want to see the source code?
-            <a href='https://github.com/atapas/theme-builder' target='_blank'>Click here.</a>
-          </p>
-
-          <ThemeSelector  setter={ setSelectedTheme }/>
-
-        </Container>
       </ThemeProvider>
     }
     </>
@@ -163,14 +221,15 @@ theme?:{
 export default function App () {
 
   setToLS('all-themes', themes.default);
-  return (
-    <Router>
-      <Switch>
-        <Route path='/' component={AppContainer} />
-      </Switch>
-      <Switch>
-        <Route path='/settings/' component={Settings} />
-      </Switch>
-    </Router>
-  );
+  return <AppContainer/>
+  // return (
+  //   <Router>
+  //     <Switch>
+  //       <Route path='/' component={AppContainer} />
+  //     </Switch>
+  //     <Switch>
+  //       <Route path='/settings/' component={Settings} />
+  //     </Switch>
+  //   </Router>
+  // );
 }

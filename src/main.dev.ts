@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 // import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, shell,ipcMain,remote } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import Store from './utils/store';
@@ -72,6 +72,11 @@ const installExtensions = async () => {
 };
 
 const createWindow = async () => {
+
+  console.log("%c #️⃣: createWindow -> createWindow ",
+  "font-size:16px;background-color:#3bc1f7;color:white;",
+  'createWindow')
+
   if (
     process.env.NODE_ENV === 'development' ||
     process.env.DEBUG_PROD === 'true'
@@ -90,7 +95,7 @@ const createWindow = async () => {
   mainWindow = new BrowserWindow({
     x,
     y,
-    show: false,
+    // show: false,
     width,
     height,
     minWidth: 285,
@@ -101,15 +106,19 @@ const createWindow = async () => {
     // icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   });
-  // mainWindow.setAlwaysOnTop(true, 'normal');
+  mainWindow.setAlwaysOnTop(true, 'normal');
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
   mainWindow.webContents.on('did-finish-load', () => {
+
+
+
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
@@ -130,6 +139,11 @@ const createWindow = async () => {
 
   // Open urls in the user's browser
   mainWindow.webContents.on('new-window', (event, url) => {
+
+    console.log("%c 🏺: createWindow -> 'did-finish-load' ",
+    "font-size:16px;background-color:#6f7330;color:white;",
+    'new-window')
+
     event.preventDefault();
     shell.openExternal(url);
   });
@@ -137,6 +151,21 @@ const createWindow = async () => {
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
+
+  ipcMain.on('app_minimize', (event) => {
+    console.log('minimizing');
+    // mainWindow.minimize();
+
+mainWindow?.minimize();
+  });
+
+  ipcMain.on('window-all-closed', () => {
+    // Respect the OSX convention of having the application in memory even
+    // after all windows have been closed
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+  });
 };
 
 /**
@@ -154,7 +183,16 @@ app.on('window-all-closed', () => {
 app.whenReady().then(createWindow).catch(console.log);
 
 app.on('activate', () => {
+
+console.log("%c 🆗: 'activate' ",
+"font-size:16px;background-color:#7caa73;color:white;",
+'activate')
+
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
+
+
+
+

@@ -1,36 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import './Navbar.scss';
 import styled from 'styled-components';
 // import * as themes from './../theme/Schema.json';
 // import { setToLS } from './../../../utils/Lstorage';
 
+const { ipcRenderer } = window.require('electron');
+
 
 const left_buttons: { class: string, func(): void,route: string }[] =
 [{
   class: 'fal fa-phone',
-func: ()=>{
+func: (func)=>{
+  func('/')
+  console.log(document.location.href)
 
-
-},route :''
+},route :'/'
 },{
   class: 'fal fa-comment-alt-dots',
-func: ()=>{
+func: (func)=>{
+  func('webchat')
+  console.log(document.location.href)
 
-
-},route :''
+},route :'/webchat/'
 },{
   class: 'fal fa-cog',
-  func: ()=>{
-
+  func: (func)=>{
+    func('/settings/')
+console.log(document.location.href)
   // alert('You pressed settings');
 
 },route :'/settings/'
 }];
 
+
+
 const right_buttons: { class: string, func(): void,route: string }[] =
 [{class: 'fal fa-window-minimize',
 func: ()=>{
+  // const { ipcRenderer } = window.require("electron");
+// const ipc = require('electron').ipcRenderer;
+
+console.log(document.location.href)
+ipcRenderer.send('app_minimize');
+console.log(document.location.href)
 
 
 },route :''
@@ -39,6 +52,7 @@ func: ()=>{
 {
   class: 'fal fa-window-close',
   func: ()=>{
+    ipcRenderer.send('window-all-closed');
 
 },route :''
 }
@@ -76,6 +90,8 @@ props)
 
 
 const Nav = styled.div`
+// position: fixed;
+padding-top:1px;
 display: flex;
 flex-direction: row;
 height: min-content;
@@ -87,7 +103,7 @@ height: min-content;
 // background-color: ${props.theme?.colors.body};
 display:flex;
 flex-ditrection: row;
-padding-top: 1px;
+// padding-top: 1px;
 
 
 &${Nav}:hover i{
@@ -98,7 +114,7 @@ padding-top: 1px;
 -webkit-app-region: drag;
   `;
 const NavRight = styled.ul`
-  padding-top: 1px;
+  // padding-top: 1px;
 width: 50%;
 height: min-content;
 // background-color: ${props.theme?.colors.body};
@@ -142,7 +158,7 @@ justify-content: flex-end;
     return (
       <Link to={route}>
   <Li>
-      <Switch className={classes} onClick={func}/>
+      <Switch className={classes} onClick={func(props.locationSet)}/>
   </Li>
       </Link>
 
